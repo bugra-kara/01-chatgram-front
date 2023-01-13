@@ -44,7 +44,7 @@ export const AuthProvider = ({children}) => {
                 notify(404, resp.data.msg);
             }
             else {
-                console.log(resp.data.data);
+                console.log(resp);
                 const { username, userId } = resp.data.data
                 if( userId) {
                     dispatch({type: USER_LOGIN, payload: {username, userId}});

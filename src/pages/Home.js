@@ -76,13 +76,11 @@ const Home = () => {
     }
   },[sendMessage])
   useEffect(()=> {
-    console.log(userAdded);
     if(userAdded) {
       socket.current.emit('accep-friend', addedUserId)
     }
   },[userAdded])
   useEffect(()=> {
-    console.log(userAdded);
     if(socket.current && !userAdded){
       socket.current.on('receive-friend',(userId)=> {
         if(userId === state.userId) {
@@ -93,12 +91,12 @@ const Home = () => {
   },[])
   useEffect(()=> {
     if(!state.token && state.userId !== null){
+      console.log(Cookies.get('accessToken'));
       const accesToken = Cookies.get('accessToken')
       localStorage.setItem('token', JSON.stringify(accesToken))
       
     }
-  },[state.isLoading])
-  console.log(userAdded, friendsReq);
+  },[state.userId])
   if (state.userId === null) {
     return <Navigate to="/login" replace={true} />
   } 
