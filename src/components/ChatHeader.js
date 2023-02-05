@@ -1,7 +1,6 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar';
 const ChatHeader = ({selectedUser}) => {
-  
   return (
     <section className='sticky row-end-1 w-full h-16 top-0 border-b-2 border-b-gray bg-gray-light flex-initial cursor-pointer' id='last-seen'>
         <div className='basis-3/12 float-left justify-center grid ml-2'>

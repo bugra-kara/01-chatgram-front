@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useRef, useEffect } from 'react'
 import { Sender, Receiver, ChatHeader, MessageBar } from '.'
 import { useAuthContext } from '../context/authContext'
@@ -27,22 +26,7 @@ const Chat =({setSendMessage}) => {
                 chatId: chatId
             }
         ]
-        try {
-            await axios.patch(`https://chatgram.onrender.com/api/v1/chats/chat/${chatId}`, {messages: messageInfo, lastMessage: messageInfo}, {withCredentials: true})
-            await axios.patch(`https://chatgram.onrender.com/api/v1/chats/users/${chatId}`, {lastMessage: {
-                message: message,
-                senderId: senderId,
-                receiverId: receiverId,
-                messageHour: hour,
-                messageMin: min,
-                messageDate: day,
-                date: date
-            }}, {withCredentials: true})
-            const newData = [...messageInfo]
-            newMessage(newData)
-        } catch (error) {
-            console.log(error);
-        }
+        newMessage(message, chatId, receiverId, senderId)
         setSendMessage([...messageInfo])
     }
     const scrollToBottom = () => {

@@ -4,7 +4,6 @@ import {
     GET_ONE_CHAT,
     NEW_MESSAGE,
     USER_LOGOUT,
-    USER_LOGIN,
     FRIEND_REQUEST,
     FRIEND_RESPONSE,
     FRIEND_ADDED
@@ -12,7 +11,6 @@ import {
 
 const reducer = (state, action) => {
     if(action.type === GET_ALL_CHATS) {
-        console.log(action.payload);
         return {...state, chats: [...action.payload], isSelect: true, userAdded: false, addedUserId: null}
     }
     if(action.type === NEW_MESSAGE) {
@@ -34,24 +32,16 @@ const reducer = (state, action) => {
     }
     if(action.type === USER_LOGOUT) {
         return {
-            friends: [],
-            chats: [],
-            isSelect: true,
-            isChat: false,
-            newMsg: false,
-            selectedUser: null,
-            selectedChat: [],
-        }
-    }
-    if(action.type === USER_LOGIN) {
-        return {
-            friends: [],
+            friendsReq: [],
             chats: [],
             isSelect: false,
             isChat: false,
             newMsg: false,
             selectedUser: null,
             selectedChat: [],
+            userAdded: false,
+            receivedMsg: false,
+            addedUserId: null
         }
     }
     if(action.type === FRIEND_REQUEST) {

@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const authMiddleware = async (userId, accessToken) => {
     try {
-        const user = await axios.get(`https://chatgram.onrender.com/api/v1/users/${userId}`, {withCredentials: true})
+        const user = await axios.get(`http://localhost:5000/api/v1/users/${userId}`, {withCredentials: true})
     } catch (error) {
         console.log(error);
     }

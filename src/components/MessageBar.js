@@ -6,7 +6,7 @@ const MessageBar = ({selectedUser, messageSent}) => {
     const [message, setMessage] = useState("")
     const handleSubmit = (e, message,chatId, receiverId) => {
         e.preventDefault()
-        const senderId = JSON.parse(localStorage.getItem('userId'))
+        const senderId = localStorage.getItem('userId')
         messageSent(message, chatId, receiverId, senderId)
         setMessage("")
     }

@@ -1,5 +1,3 @@
-import Navbar from './Navbar'
-import Footer from './Footer'
 import Sidebar from './Sidebar'
 import Layout from './Layout'
 import PrivateRoute from './PrivateRoute'
@@ -12,9 +10,8 @@ import Receiver from './Receiver'
 import ChatHeader from './ChatHeader'
 import MessageBar from './MessageBar'
 import FriendModal from './FriendModal'
+import ProtectedRoutes from './ProtectedRoutes'
 export {
-    Navbar,
-    Footer,
     Sidebar,
     Layout,
     PrivateRoute,
@@ -26,5 +23,6 @@ export {
     Receiver,
     ChatHeader,
     MessageBar,
-    FriendModal
+    FriendModal,
+    ProtectedRoutes
 }

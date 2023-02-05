@@ -7,12 +7,25 @@ import {
 const reducer = (state, action) => {
     if(action.type === USER_LOGIN){
         if(action.payload.userId) {
-            localStorage.setItem('userId', JSON.stringify(action.payload.userId))
-            return {...state, isLogged: true, user: { username: action.payload.username, id: action.payload.userId }, email: "",
+            localStorage.setItem('userId', action.payload.userId)
+            localStorage.setItem('username', action.payload.username)
+            return {...state, user: action.payload.username, email: "",
             password: "", userId: action.payload.userId }
         }
         else {
             return {...state}
+        }
+    }
+    if(action.type === USER_LOGOUT) {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('username')
+        return {...state, isLogged: false,
+            user: null,
+            isLoading: false,
+            username: "",
+            email: "",
+            password: "",
+            userId: null,
         }
     }
     if(action.type === LOADING) {
@@ -23,18 +36,7 @@ const reducer = (state, action) => {
         const { name, value } = action.payload
         return {...state, [name]: value }
     }
-    if(action.type === USER_LOGOUT) {
-        localStorage.removeItem('userId')
-        localStorage.removeItem('token')
-        return {...state, isLogged: false,
-            user: null,
-            username: "",
-            userId: null,
-            email: "",
-            isLoading: false,
-            token: null
-        }
-    }
+    
     return state
 }
 export default reducer

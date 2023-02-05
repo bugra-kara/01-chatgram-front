@@ -10,7 +10,6 @@ const FriendModal = ({modalOpen, handleSubmit, optimizedDebounce, search, result
   const {friendsReq} = useUserContext((state)=> state.friendsReq)
   const { friendRes } = useUserContext()
   const [page, setPage] = useState(true)
-  console.log(friendsReq);
   const handleChange = ()=> {
     setPage(!page)
   }
