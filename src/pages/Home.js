@@ -44,14 +44,14 @@ const Home = () => {
       setSearch(e.target.value)
       clearTimeout(timeoutId)
       timeoutId = setTimeout(async ()=> {
-        const resp = await axios.get(`http://localhost:5000/api/v1/users/search?search=${e.target.value}&userId=${state.userId}`,{withCredentials: true})
+        const resp = await axios.get(`https://chatgram.onrender.com/api/v1/users/search?search=${e.target.value}&userId=${state.userId}`,{withCredentials: true})
         setResult(resp.data.data)
       }, 1000)
     }
   }
   const optimizedDebounce = useMemo(()=> debounce(), [])
   useEffect(()=> {
-    socket.current = io('http://localhost:5000')
+    socket.current = io('https://chatgram.onrender.com')
     if(state.userId !== null){
       socket.current.emit('new-user-add', state.userId)
     }

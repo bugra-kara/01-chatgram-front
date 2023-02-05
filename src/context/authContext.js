@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
     const handleSubmitRegister = async (e) => {
         e.preventDefault()
         try {
-            const resp = await axios.post('http://localhost:5000/api/v1/auth/register', {email: state.email, password: state.password, username: state.username}, {withCredentials: true})
+            const resp = await axios.post('https://chatgram.onrender.com/api/v1/auth/register', {email: state.email, password: state.password, username: state.username}, {withCredentials: true})
             if(resp.statusText === 'Created'){
                 notify(200, "Registered!");
                 navigate("/login");
@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
         e.preventDefault()
         dispatch({type: LOADING})
         try {
-            const resp = await axios.post('http://localhost:5000/api/v1/auth/login', {email: state.email, password: state.password}, {withCredentials: true})
+            const resp = await axios.post('https://chatgram.onrender.com/api/v1/auth/login', {email: state.email, password: state.password}, {withCredentials: true})
             if(resp.data.result === "failed") {
                 notify(404, resp.data.msg);
             }
@@ -50,7 +50,7 @@ export const AuthProvider = ({children}) => {
     }
     const handleQuit = async () => {
         try {
-            const resp = await axios.delete('http://localhost:5000/api/v1/auth/logout', {withCredentials: true})
+            const resp = await axios.delete('https://chatgram.onrender.com/api/v1/auth/logout', {withCredentials: true})
             if(resp.status === 200) {
               dispatch({type: USER_LOGOUT});
               notify(200, "Logged out!");

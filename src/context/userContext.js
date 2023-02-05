@@ -24,7 +24,7 @@ export const UserProvider = ({children}) => {
     const getAllChatsContext = async (id) => {
       try {
         if(id !== null) {
-            const resp = await axios.get(`http://localhost:5000/api/v1/chats/${id}`,{withCredentials: true})
+            const resp = await axios.get(`https://chatgram.onrender.com/api/v1/chats/${id}`,{withCredentials: true})
             dispatch({type: GET_ALL_CHATS, payload: resp.data.data})
         }
       } catch (error) {
@@ -37,7 +37,7 @@ export const UserProvider = ({children}) => {
     const getAllMessages = async () => {
       try {
         const userId = localStorage.getItem('userId')
-        const resp = await axios.get(`http://localhost:5000/api/v1/chats/users/${state.selectedUser.selectedUserData.chatId}?userId=${userId}`,{withCredentials: true})
+        const resp = await axios.get(`https://chatgram.onrender.com/api/v1/chats/users/${state.selectedUser.selectedUserData.chatId}?userId=${userId}`,{withCredentials: true})
         getOneChatContext(resp)
       } catch (error) {
         console.log(error);
@@ -66,8 +66,8 @@ export const UserProvider = ({children}) => {
       try {
           if(!isReceive) {
             await Promise.all([
-              axios.patch(`http://localhost:5000/api/v1/chats/chat/${chatId}`, {messages: messageInfo, lastMessage: messageInfo}, {withCredentials: true}),
-              axios.patch(`http://localhost:5000/api/v1/chats/users/${chatId}`, {lastMessage: {
+              axios.patch(`https://chatgram.onrender.com/api/v1/chats/chat/${chatId}`, {messages: messageInfo, lastMessage: messageInfo}, {withCredentials: true}),
+              axios.patch(`https://chatgram.onrender.com/api/v1/chats/users/${chatId}`, {lastMessage: {
                 message: message,
                 senderId: senderId,
                 receiverId: receiverId,
@@ -89,7 +89,7 @@ export const UserProvider = ({children}) => {
     }
     const friendReq = async (data) => {
       try {
-        await axios.patch(`http://localhost:5000/api/v1/users/friend/req`,{userId: data},{withCredentials: true})
+        await axios.patch(`https://chatgram.onrender.com/api/v1/users/friend/req`,{userId: data},{withCredentials: true})
       } catch (error) {
         console.log(error);
       }
@@ -97,7 +97,7 @@ export const UserProvider = ({children}) => {
     }
     const getFriendReq = async (data) => {
       try {
-        const resp = await axios.get(`http://localhost:5000/api/v1/users/friend/req?user=${data}`,{withCredentials: true})
+        const resp = await axios.get(`https://chatgram.onrender.com/api/v1/users/friend/req?user=${data}`,{withCredentials: true})
         dispatch({type: FRIEND_REQUEST, payload: resp})
       } catch (error) {
         console.log(error);
@@ -108,10 +108,10 @@ export const UserProvider = ({children}) => {
         try {
           const user = localStorage.getItem('userId')
           // eslint-disable-next-line no-dupe-keys
-          const resp = await axios.post(`http://localhost:5000/api/v1/chats/users`,{chatUsers: [{userId:user }, {userId: payload.id}], },{withCredentials: true})
+          const resp = await axios.post(`https://chatgram.onrender.com/api/v1/chats/users`,{chatUsers: [{userId:user }, {userId: payload.id}], },{withCredentials: true})
           if(resp.data.result === "success"){
             try {
-              const resp = await axios.patch(`http://localhost:5000/api/v1/users/friend/res`,{fId: payload.id},{withCredentials: true})
+              const resp = await axios.patch(`https://chatgram.onrender.com/api/v1/users/friend/res`,{fId: payload.id},{withCredentials: true})
               if(resp.data.result === "success"){
                 dispatch({type: FRIEND_ADDED})
                 dispatch({type: FRIEND_RESPONSE, payload: payload.id})
@@ -127,7 +127,7 @@ export const UserProvider = ({children}) => {
       }
       else if (payload.ask === 'reject'){
         try {
-          await axios.patch(`http://localhost:5000/api/v1/users/friend/resReject`,{fId: payload.id},{withCredentials: true})
+          await axios.patch(`https://chatgram.onrender.com/api/v1/users/friend/resReject`,{fId: payload.id},{withCredentials: true})
           dispatch({type: FRIEND_RESPONSE, payload: payload.id})
           notify(100,"Friend Rejected!")
         } catch (error) {
